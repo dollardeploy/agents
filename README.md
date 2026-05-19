@@ -17,6 +17,6 @@ You can register this repository as a Claude Code Plugin marketplace by running 
 
 **Alternatively, directly install either Plugin via:**
 
-`/plugin install dollardeploy-skills@dollardeploy-agent`
+`/plugin install dollardeploy-skills@dollardeploy-agents`
 
 After installing the plugin, you can use the skill by just mentioning it or asking to deploy your app.
