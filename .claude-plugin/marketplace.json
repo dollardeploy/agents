@@ -1,0 +1,22 @@
+{
+  "name": "dollardeploy-agents",
+  "owner": {
+    "name": "DollarDeploy",
+    "email": "hello@dollardeploy.com"
+  },
+  "metadata": {
+    "description": "DollarDeploy agents for deploying and managing apps on user-owned servers",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "dollardeploy-cli",
+      "description": "DollarDeploy CLI skills for deploying and managing apps on user-owned servers",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/dollardeploy-cli"
+      ]
+    }
+  ]
+}
