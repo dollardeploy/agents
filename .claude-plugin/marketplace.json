@@ -6,11 +6,11 @@
   },
   "metadata": {
     "description": "DollarDeploy agents for deploying and managing apps on user-owned servers",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
-      "name": "dollardeploy-cli",
+      "name": "dollardeploy-skills",
       "description": "DollarDeploy CLI skills for deploying and managing apps on user-owned servers",
       "source": "./",
       "strict": false,
