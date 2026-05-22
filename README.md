@@ -1,6 +1,8 @@
 # DollarDeploy Agents
 
-Open repository to make it easy for AI agents to manage your infrastructure and deploy your apps using [DollarDeploy](https://dollardeploy.com).
+Open repository to make it easy for AI agents to manage your infrastructure and deploy your apps using [DollarDeploy](https://dollardeploy.com). 
+
+Contribute to this repository by creating a [pull request](https://github.com/dollardeploy/agents/pulls).
 
 ## Skills
 
