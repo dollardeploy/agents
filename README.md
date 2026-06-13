@@ -51,5 +51,5 @@ Get your API key from [DollarDeploy Settings](https://dollardeploy.com/settings/
 - [CLI on npm](https://www.npmjs.com/package/@dollardeploy/cli) - `@dollardeploy/cli`
 - [Documentation](https://docs.dollardeploy.com/cli) - CLI docs
 - [API Reference](https://dollardeploy.com/apidocs) - REST API
-- [Discord](https://discord.gg/BHbfmaAGb7) - Community
+- [Discord](https://dollardeploy.com/discord) - Community
 - [Claude Code Plugins](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills) - How plugins work
