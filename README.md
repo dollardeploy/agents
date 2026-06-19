@@ -1,15 +1,14 @@
 # DollarDeploy Agents
 
-Open repository to make it easy for AI agents to manage your infrastructure and deploy your apps using [DollarDeploy](https://dollardeploy.com).
+Open repository to make it easy for AI agents to manage your infrastructure and deploy your apps using [DollarDeploy](https://dollardeploy.com). 
 
 Contribute to this repository by creating a [pull request](https://github.com/dollardeploy/agents/pulls).
 
 ## Skills
 
-| Skill                         | Description                                                                                                                                        |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dollardeploy-cli`            | Deploy apps, manage hosts, and interact with DollarDeploy from the terminal using the [`ddc` CLI](https://www.npmjs.com/package/@dollardeploy/cli) |
-| `dollardeploy-custom-service` | Create and publish a custom `service-<name>` repo that installs software on a host via `prepare.sh`                                                |
+| Skill | Description |
+|-------|-------------|
+| `dollardeploy-cli` | Deploy apps, manage hosts, and interact with DollarDeploy from the terminal using the [`ddc` CLI](https://www.npmjs.com/package/@dollardeploy/cli) |
 
 ## Claude Code
 
