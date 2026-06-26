@@ -14,11 +14,7 @@
       "description": "DollarDeploy CLI skills for deploying and managing apps on user-owned servers",
       "source": "./",
       "strict": false,
-      "skills": [
-        "./skills/dollardeploy-cli",
-        "./skills/dollardeploy-custom-service",
-        "./skills/dollardeploy-template"
-      ]
+      "skills": ["./skills/dollardeploy-cli", "./skills/dollardeploy-custom-service"]
     }
   ]
 }

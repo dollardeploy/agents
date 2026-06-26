@@ -10,7 +10,6 @@ Contribute to this repository by creating a [pull request](https://github.com/do
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dollardeploy-cli`            | Deploy apps, manage hosts, and interact with DollarDeploy from the terminal using the [`ddc` CLI](https://www.npmjs.com/package/@dollardeploy/cli) |
 | `dollardeploy-custom-service` | Create and publish a custom `service-<name>` repo that installs software on a host via `prepare.sh`                                                |
-| `dollardeploy-template`       | Add an app to the deploy catalog via a `.dollardeploy.yml` template in the [`templates`](https://github.com/dollardeploy/templates) repo           |
 
 ## Claude Code
 
