@@ -24,18 +24,18 @@ A template points at a source repo (its own or a third party's) and declares how
 Top-level fields (`.dollardeploy.yml`):
 
 | Field            | Req | Notes                                                                              |
-| ---------------- | --- | ---------------------------------------------------------------------------------- | ------------------------------------ |
+| ---------------- | --- | ---------------------------------------------------------------------------------- |
 | `id`             | ✅  | Matches dir name                                                                   |
 | `name`           | ✅  | Display name                                                                       |
 | `intro`          | ✅  | One-line summary for the card                                                      |
-| `description`    |     | Longer markdown (`                                                                 | ` block). Shown on the template page |
+| `description`    |     | Longer markdown block. Shown on the template page                                  |
 | `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL             |
-| `tags`           |     | List for filtering, e.g. `cms`, `oss`, `popular`, `template`                       |
-| `deployTime`     |     | Human estimate, e.g. `~3 minutes`                                                  |
+| `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                            |
+| `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                          |
 | `demoUrl`        |     | Live demo link                                                                     |
 | `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`               |
 | `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)       |
-| `postLaunchNote` |     | Markdown shown after deploy. Can reference resolved env, e.g. `${MINIO_ROOT_USER}` |
+| `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}`     |
 | `experimental`   |     | `true` to flag as experimental                                                     |
 | `introVideoUrl`  |     | Optional walkthrough video                                                         |
 
@@ -70,7 +70,7 @@ The `app` object (required):
 
 ## Interpolation Variables
 
-Use `${VAR}` inside `env` values. The platform resolves these at launch:
+Use `${VAR}` inside `env` values. The platform resolves these at launch
 
 | Variable              | Resolves to                                                                     |
 | --------------------- | ------------------------------------------------------------------------------- |
@@ -79,15 +79,15 @@ Use `${VAR}` inside `env` values. The platform resolves these at launch:
 | `${PORT}`             | The app port (from `mainPort`, else `env.PORT`, else `3000`)                    |
 | `${USER_EMAIL}`       | Deploying user's email                                                          |
 | `${USER_IPADDRESS}`   | User's IP — typically with `allowAccessFrom: "${USER_IPADDRESS}"`               |
-| `${GENERATED_PWD}`    | Random 10-char password — generated **only if referenced**                      |
-| `${GENERATED_HASH}`   | Random 32-char hash — generated only if referenced                              |
+| `${GENERATED_PWD}`    | Random 10-char password — generated and saved in app env **only if referenced** |
+| `${GENERATED_HASH}`   | Random 32-char hash — generated and saved in app env only if referenced         |
 | `${GENERATED_SECRET}` | Random 32-byte hex (like `openssl rand -hex 32`) — generated only if referenced |
 
-`GENERATED_*` values persist on the app's env after first launch, so secrets stay stable across redeploys. They are auto-marked secret in the UI.
+`GENERATED_*` values persist on the app's env after first launch, so secrets stay stable across redeploys. They are auto-marked secret in the UI. Others are just available for every app during build or deploy. Consult with https://docs.dollardeploy.com/predefined-variables/ for more information about predefined variables.
 
 ## docker-compose Conventions
 
-Bind published ports to loopback so DollarDeploy's reverse proxy handles TLS and the public URL:
+Bind published ports to 127.0.0.1 so DollarDeploy's reverse proxy handles TLS and the public URL, and your app never exposed without reverse proxy:
 
 ```yaml
 ports:
@@ -149,14 +149,14 @@ app:
         curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-`index.js` also supports `files: [{ path: relative/file }]` (no `content`) to inline a file that lives in the template dir.
+Templates also support `files: [{ path: relative/file }]` (no `content`) to inline a file that lives in the template dir.
 
 ## Publish Workflow
 
 1. Add `templates/<id>/.dollardeploy.yml` (+ `docker-compose.yml`, logo, scripts as needed).
 2. Validate it parses and matches the schema: from the templates repo root run `node index.js > /tmp/out.json` — it prints each template and errors on missing referenced files.
 3. Open a PR against `github.com/dollardeploy/templates`.
-4. On merge to `main`, the **Generate Templates** Action runs `node index.js > templates.json` and commits it; **Deploy Changed Templates** redeploys the demo. The app then appears at `/r`.
+4. On merge to `main`, the **Generate Templates** Action runs `node index.js > templates.json` and commits it; **Deploy Changed Templates** redeploys the demo. The app template then appears at `/r`.
 
 ## Common Mistakes
 
