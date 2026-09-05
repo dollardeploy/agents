@@ -32,22 +32,22 @@ Key resolution: `--api-key` flag > `DOLLARDEPLOY_API_KEY` env > `~/.dollardeploy
 
 ## Quick Reference
 
-| Task                  | Command                                               |
-| --------------------- | ----------------------------------------------------- |
-| List hosts            | `ddc host list [--json]`                              |
-| Create host           | `ddc host create --name my-server --provider hetzner` |
-| Prepare host          | `ddc host prepare <host-id>`                          |
-| Destroy host          | `ddc host destroy <host-id> [--yes]`                  |
-| Remove host (keep VM) | `ddc host remove <host-id> [--yes]`                   |
-| Deploy from GitHub    | `ddc deploy --url <github-url> --hostId <host-id>`    |
-| Deploy + new host     | `ddc deploy --url <github-url> --create-host`         |
-| Deploy template       | `ddc deploy --template <id> --hostId <host-id>`       |
-| Redeploy app          | `ddc deploy --appId <app-id>`                         |
-| Build app             | `ddc build <app-id> [--deploy]`                       |
-| List apps             | `ddc app list [--json]`                               |
-| List templates        | `ddc template list [search]`                          |
-| Add SSH key           | `ddc ssh add ~/.ssh/id_rsa --name my-key`             |
-| Show user             | `ddc user`                                            |
+| Task | Command |
+|------|---------|
+| List hosts | `ddc host list [--json]` |
+| Create host | `ddc host create --name my-server --provider hetzner` |
+| Prepare host | `ddc host prepare <host-id>` |
+| Destroy host | `ddc host destroy <host-id> [--yes]` |
+| Remove host (keep VM) | `ddc host remove <host-id> [--yes]` |
+| Deploy from GitHub | `ddc deploy --url <github-url> --hostId <host-id>` |
+| Deploy + new host | `ddc deploy --url <github-url> --create-host` |
+| Deploy template | `ddc deploy --template <id> --hostId <host-id>` |
+| Redeploy app | `ddc deploy --appId <app-id>` |
+| Build app | `ddc build <app-id> [--deploy]` |
+| List apps | `ddc app list [--json]` |
+| List templates | `ddc template list [search]` |
+| Add SSH key | `ddc ssh add ~/.ssh/id_rsa --name my-key` |
+| Show user | `ddc user` |
 
 ## Deploy Workflow
 
@@ -68,42 +68,6 @@ To set env vars or app properties during deploy:
 ddc deploy --url <url> --hostId <id> --env:DATABASE_URL postgres://... --set:mainPort 8080
 ```
 
-## Predefined & Customization Variables
-
-DollarDeploy injects some env vars automatically and reads others you set to customize
-build/deploy/service behavior. Set them via `--env NAME=VALUE` / `--env:NAME value` on deploy,
-`ddc app modify <id> --env NAME=VALUE`, a template's `.dollardeploy.yml` `env:` map, or the dashboard.
-**Booleans are `1`/`0`, never `true`/`false`.** Full reference: https://docs.dollardeploy.com/predefined-variables/
-
-**Auto-provided (build + deploy — read, don't set):** `APP_URL` (`https://<hostname>`), `APP_HOSTNAME`,
-`APP_ALIASES`, `APP_LISTEN_HOSTNAME`/`APP_INTERNAL_HOSTNAME` (`127.0.0.1` — bind here so the proxy fronts you),
-`GIT_TAGS`, `GIT_LAST_COMMIT`, `NODE_ENV=production` (Node apps), `USER_EMAIL`, `USER_IPADDRESS`,
-`PORT` (`mainPort`, else `env.PORT`, else `3000`). docker-compose also gets `USER_UID`/`USER_GID`.
-
-**Service URLs (appear once the service is added):** `POSTGRES_URL` / `REDIS_URL` / `MONGODB_URL` / `MARIADB_URL`
-(in-container variants `POSTGRES_DOCKER_URL`, `REDIS_DOCKER_URL`). Extract parts with
-`${VAR:component}` — components: `host`, `hostname`, `port`, `path`, `username`, `password`, `database`, `query`, `fragment`
-(e.g. `${POSTGRES_URL:password}`).
-
-**Template generators (set in a template `env:`, generated only if referenced, then persisted & auto-secret):**
-`${GENERATED_PWD}` (10-char), `${GENERATED_HASH}` (32-char), `${GENERATED_SECRET}` (64-char hex, `openssl rand -hex 32`).
-
-**Customization toggles you set:**
-
-| Variable                                                                       | Default       | Effect                                                                          |
-| ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------- |
-| `DEPLOY_HOSTNAME_MATCH`                                                        | `1`           | `0` skips the DNS-matches-server check (behind Cloudflare/CDN)                  |
-| `APP_READY_TIMEOUT`                                                            | `300`         | Seconds to wait for the app to become ready                                     |
-| `APP_HEALTHCHECK_ENABLE` / `APP_HEALTHCHECK_PATH` / `APP_HEALTHCHECK_EXTERNAL` | — / `/` / `0` | Enable healthchecks, path to probe, `1` probes `${APP_URL}`                     |
-| `BUILD_NO_SERVICE_ENV`                                                         | —             | `1` excludes service URLs during build (e.g. Next.js prerender reaching the DB) |
-| `BUILD_MEMORY_LIMIT` / `BUILD_CPU_LIMIT`                                       | —             | Build container resource caps                                                   |
-| `DOCKER_COMPOSE_WAIT_TIMEOUT` / `DOCKER_COMPOSE_BUILD` / `DOCKER_COMPOSE_PULL` | `120` / — / — | Wait seconds; `1` rebuild each deploy; `policy` pull updated images             |
-
-**Server/service install config (host env vars):** `POSTGRES_VERSION`, `POSTGRES_FORCE_INSTALL`,
-`POSTGRES_DATABASES`, `POSTGRES_PASSWORD`, `POSTGRES_DATA_PATH`, `REDIS_DATA_PATH`, `ENCRYPTED_DEVICE` (LUKS).
-
-Reserved build vars (`APP_NAME`, `APP_TYPE`, `GIT_URL`, and the auto-provided ones above) are rejected if you set them.
-
 ## Local Development
 
 When testing against the local DollarDeploy dev server:
@@ -118,11 +82,11 @@ export DOLLARDEPLOY_BASE_URL=http://localhost:3000
 
 ## Provider Defaults
 
-| Provider | `--type`    | `--region` | `--image`    |
-| -------- | ----------- | ---------- | ------------ |
-| hetzner  | cax11       | fsn1       | ubuntu-24.04 |
-| do       | s-2vcpu-4gb | fra1       | ubuntu-24-04 |
-| verda    | CPU.4V.16G  | FIN-01     | ubuntu-24.04 |
+| Provider | `--type` | `--region` | `--image` |
+|----------|----------|------------|-----------|
+| hetzner | cax11 | fsn1 | ubuntu-24.04 |
+| do | s-2vcpu-4gb | fra1 | ubuntu-24-04 |
+| verda | CPU.4V.16G | FIN-01 | ubuntu-24.04 |
 
 ## Global Flags
 
