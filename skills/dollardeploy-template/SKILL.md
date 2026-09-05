@@ -23,21 +23,21 @@ A template points at a source repo (its own or a third party's) and declares how
 
 Top-level fields (`.dollardeploy.yml`):
 
-| Field            | Req | Notes                                                                              |
-| ---------------- | --- | ---------------------------------------------------------------------------------- |
-| `id`             | ✅  | Matches dir name                                                                   |
-| `name`           | ✅  | Display name                                                                       |
-| `intro`          | ✅  | One-line summary for the card                                                      |
-| `description`    |     | Longer markdown block. Shown on the template page                                  |
-| `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL             |
-| `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                            |
-| `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                          |
-| `demoUrl`        |     | Live demo link                                                                     |
-| `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`               |
-| `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)       |
-| `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}`     |
-| `experimental`   |     | `true` to flag as experimental                                                     |
-| `introVideoUrl`  |     | Optional walkthrough video                                                         |
+| Field            | Req | Notes                                                                         |
+| ---------------- | --- | ----------------------------------------------------------------------------- |
+| `id`             | ✅  | Matches dir name                                                              |
+| `name`           | ✅  | Display name                                                                  |
+| `intro`          | ✅  | One-line summary for the card                                                 |
+| `description`    |     | Longer markdown block. Shown on the template page                             |
+| `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL        |
+| `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                        |
+| `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                    |
+| `demoUrl`        |     | Live demo link                                                                |
+| `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`          |
+| `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)  |
+| `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}` |
+| `experimental`   |     | `true` to flag as experimental                                                |
+| `introVideoUrl`  |     | Optional walkthrough video                                                    |
 
 The `app` object (required):
 
@@ -83,7 +83,9 @@ Use `${VAR}` inside `env` values. The platform resolves these at launch
 | `${GENERATED_HASH}`   | Random 32-char hash — generated and saved in app env only if referenced         |
 | `${GENERATED_SECRET}` | Random 32-byte hex (like `openssl rand -hex 32`) — generated only if referenced |
 
-`GENERATED_*` values persist on the app's env after first launch, so secrets stay stable across redeploys. They are auto-marked secret in the UI. Others are just available for every app during build or deploy. Consult with https://docs.dollardeploy.com/predefined-variables/ for more information about predefined variables.
+`GENERATED_*` values persist on the app's env after first launch, so secrets stay stable across redeploys. They are auto-marked secret in the UI. Others are just available for every app during build or deploy.
+
+For the full set of predefined and customization variables (auto-provided app env, service URLs, `${VAR:component}` expansion, healthcheck/build/docker-compose toggles), see the env vars reference in [[dollardeploy-cli]] or https://docs.dollardeploy.com/predefined-variables/.
 
 ## docker-compose Conventions
 

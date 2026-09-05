@@ -34,8 +34,10 @@ Built-in services (redis, postgres, mariadb, mongodb, docker, firewall, luks, dd
   echo "{{env:SERVICE_CUSTOM_${SERVICE_ID}_TAILSCALE_URL:http://127.0.0.1:8080}}"
   ```
 
-  The `SERVICE_CUSTOM_${SERVICE_ID}_` prefix is mandatory — only prefixed markers will be persisted for the service. 
+  The `SERVICE_CUSTOM_${SERVICE_ID}_` prefix is mandatory — only prefixed markers will be persisted for the service.
   On the next prepare they come back as `SERVICE_CUSTOM_${SERVICE_ID}_API_URL` in the environment; read them to stay idempotent.
+
+For the host env available to `prepare.sh` (service URLs, `APP_*`, server install config like `POSTGRES_VERSION`), see the env vars reference in [[dollardeploy-cli]] or https://docs.dollardeploy.com/predefined-variables/.
 
 ## Example: service-tailscale
 
