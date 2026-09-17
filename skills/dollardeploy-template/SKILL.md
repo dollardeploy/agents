@@ -35,7 +35,6 @@ Top-level fields (`.dollardeploy.yml`):
 | `demoUrl`        |     | Live demo link                                                                |
 | `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`          |
 | `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)  |
-| `preLaunchNote`  |     | Markdown shown before launch, e.g. config the app needs to run (like an HF token) |
 | `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}` |
 | `experimental`   |     | `true` to flag as experimental                                                |
 | `introVideoUrl`  |     | Optional walkthrough video                                                    |
