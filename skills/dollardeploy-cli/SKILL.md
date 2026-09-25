@@ -36,7 +36,6 @@ Key resolution: `--api-key` flag > `DOLLARDEPLOY_API_KEY` env > `~/.dollardeploy
 | --------------------- | ----------------------------------------------------- |
 | List hosts            | `ddc host list [--json]`                              |
 | Create host           | `ddc host create --name my-server --provider hetzner` |
-| Update host           | `ddc host update <host-id> --name x --env K=V`        |
 | Prepare host          | `ddc host prepare <host-id>`                          |
 | Destroy host          | `ddc host destroy <host-id> [--yes]`                  |
 | Remove host (keep VM) | `ddc host remove <host-id> [--yes]`                   |
@@ -48,7 +47,7 @@ Key resolution: `--api-key` flag > `DOLLARDEPLOY_API_KEY` env > `~/.dollardeploy
 | List apps             | `ddc app list [--json]`                               |
 | List templates        | `ddc template list [search]`                          |
 | Add SSH key           | `ddc ssh add ~/.ssh/id_rsa --name my-key`             |
-| Show user and roles   | `ddc user` (alias `ddc auth status`)                  |
+| Show user             | `ddc user`                                            |
 
 ## Deploy Workflow
 
@@ -102,7 +101,6 @@ build/deploy/service behavior. Set them via `--env NAME=VALUE` / `--env:NAME val
 
 **Server/service install config (host env vars):** `POSTGRES_VERSION`, `POSTGRES_FORCE_INSTALL`,
 `POSTGRES_DATABASES`, `POSTGRES_PASSWORD`, `POSTGRES_DATA_PATH`, `REDIS_DATA_PATH`, `ENCRYPTED_DEVICE` (LUKS).
-Set them with `ddc host update <host-id> --env NAME=VALUE` (merged with existing), then `ddc host prepare <host-id>`.
 
 Reserved build vars (`APP_NAME`, `APP_TYPE`, `GIT_URL`, and the auto-provided ones above) are rejected if you set them.
 
