@@ -23,22 +23,22 @@ A template points at a source repo (its own or a third party's) and declares how
 
 Top-level fields (`.dollardeploy.yml`):
 
-| Field            | Req | Notes                                                                         |
-| ---------------- | --- | ----------------------------------------------------------------------------- |
-| `id`             | ✅  | Matches dir name                                                              |
-| `name`           | ✅  | Display name                                                                  |
-| `intro`          | ✅  | One-line summary for the card                                                 |
-| `description`    |     | Longer markdown block. Shown on the template page                             |
-| `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL        |
-| `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                        |
-| `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                    |
-| `demoUrl`        |     | Live demo link                                                                |
-| `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`          |
-| `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)  |
+| Field            | Req | Notes                                                                             |
+| ---------------- | --- | --------------------------------------------------------------------------------- |
+| `id`             | ✅  | Matches dir name                                                                  |
+| `name`           | ✅  | Display name                                                                      |
+| `intro`          | ✅  | One-line summary for the card                                                     |
+| `description`    |     | Longer markdown block. Shown on the template page                                 |
+| `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL            |
+| `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                            |
+| `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                        |
+| `demoUrl`        |     | Live demo link                                                                    |
+| `requirements`   |     | `memory` (MB), `cpu`, `storage` (GB), optional `gpu: {model, count}`              |
+| `services`       |     | Host services to ensure first, e.g. `- docker` (needed for `docker-compose`)      |
 | `preLaunchNote`  |     | Markdown shown before launch, e.g. config the app needs to run (like an HF token) |
-| `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}` |
-| `experimental`   |     | `true` to flag as experimental                                                |
-| `introVideoUrl`  |     | Optional walkthrough video                                                    |
+| `postLaunchNote` |     | Markdown shown after deploy. Can reference app env, e.g. `${MINIO_ROOT_USER}`     |
+| `experimental`   |     | `true` to flag as experimental                                                    |
+| `introVideoUrl`  |     | Optional walkthrough video                                                        |
 
 The `app` object (required):
 
