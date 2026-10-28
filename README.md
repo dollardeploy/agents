@@ -39,13 +39,13 @@ Install the DollarDeploy CLI:
 npm install -g @dollardeploy/cli
 ```
 
-Then sign in (opens the browser, use `--no-browser` over SSH):
+Then authenticate:
 
 ```bash
 ddc auth
 ```
 
-For CI, create an API key in [DollarDeploy Settings](https://dollardeploy.com/settings/api) and pass it with `--api-key` or `DOLLARDEPLOY_API_KEY`.
+Get your API key from [DollarDeploy Settings](https://dollardeploy.com/settings/api).
 
 ## Links
 
