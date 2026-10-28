@@ -18,17 +18,25 @@ Or one-off: `npx @dollardeploy/cli <command>`
 ## Auth
 
 ```bash
-# Interactive
+# Browser login (the user approves on the consent page)
 ddc auth
+
+# SSH / remote host: print the URL, the user approves in any browser and pastes the redirected URL
+ddc auth --no-browser
+
+# Paste an API key created in Settings -> API Keys
+ddc auth --paste
 
 # Non-interactive
 ddc auth --api-key <key>
 
 # For local dev server
-ddc auth --api-key <key> --base-url http://localhost:3000
+ddc auth --base-url http://localhost:3000
 ```
 
 Key resolution: `--api-key` flag > `DOLLARDEPLOY_API_KEY` env > `~/.dollardeploy/auth` file.
+
+`ddc auth` without flags waits up to 5 minutes for the user to approve in the browser; as an agent, ask the user to run it, or use `--api-key`. If the saved token is revoked, a command run in a terminal signs in with the browser again. With `--api-key`, `DOLLARDEPLOY_API_KEY` or no TTY it fails with ``Token is unknown or revoked. Run `ddc auth` to sign in again.``
 
 ## Quick Reference
 
