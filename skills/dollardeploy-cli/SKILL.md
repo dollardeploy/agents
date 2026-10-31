@@ -94,6 +94,7 @@ build/deploy/service behavior. Set them via `--env NAME=VALUE` / `--env:NAME val
 | Variable                                                                       | Default       | Effect                                                                          |
 | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------- |
 | `DEPLOY_HOSTNAME_MATCH`                                                        | `1`           | `0` skips the DNS-matches-server check (behind Cloudflare/CDN)                  |
+| `APP_URL_HTTPS`                                                                | `0`           | `1` makes `APP_URL` https:// when TLS ends in front of nginx (Tailscale Serve)  |
 | `APP_READY_TIMEOUT`                                                            | `300`         | Seconds to wait for the app to become ready                                     |
 | `APP_HEALTHCHECK_ENABLE` / `APP_HEALTHCHECK_PATH` / `APP_HEALTHCHECK_EXTERNAL` | — / `/` / `0` | Enable healthchecks, path to probe, `1` probes `${APP_URL}`                     |
 | `BUILD_NO_SERVICE_ENV`                                                         | —             | `1` excludes service URLs during build (e.g. Next.js prerender reaching the DB) |
