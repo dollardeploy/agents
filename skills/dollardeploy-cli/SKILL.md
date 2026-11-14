@@ -48,6 +48,7 @@ Key resolution: `--api-key` flag > `DOLLARDEPLOY_API_KEY` env > `~/.dollardeploy
 | List apps             | `ddc app list [--json]`                               |
 | List templates        | `ddc template list [search]`                          |
 | Add SSH key           | `ddc ssh add ~/.ssh/id_rsa --name my-key`             |
+| Attach SSH key        | `ddc host update <host-id> --sshKeyId <key-id>`       |
 | Show user and roles   | `ddc user` (alias `ddc auth status`)                  |
 
 ## Deploy Workflow
