@@ -29,7 +29,7 @@ Top-level fields (`.dollardeploy.yml`):
 | `name`           | ✅  | Display name                                                                      |
 | `intro`          | ✅  | One-line summary for the card                                                     |
 | `description`    |     | Longer markdown block. Shown on the template page                                 |
-| `logo`           |     | Image file in the template dir, e.g. `logo.svg`. Never a URL (`index.js` rejects) |
+| `logo`           |     | Absolute URL. For repo-hosted images use the raw githubusercontent URL            |
 | `tags`           |     | List for filtering, e.g. `cms, oss, popular, template`                            |
 | `deployTime`     |     | Human-friendly estimate, e.g. `~3 minutes`                                        |
 | `demoUrl`        |     | Live demo link                                                                    |
@@ -107,7 +107,7 @@ Use `${VAR:-default}` for defaults so compose works standalone too. Declare name
 id: ghost-cms
 name: Ghost CMS
 intro: "Independent platform for publishing by web and email newsletter."
-logo: logo.png
+logo: https://raw.githubusercontent.com/dollardeploy/templates/refs/heads/main/ghost-cms/logo.png
 tags: [cms, blog, oss, popular]
 deployTime: ~3 minutes
 description: |
@@ -156,7 +156,7 @@ Templates also support `files: [{ path: relative/file }]` (no `content`) to inli
 
 ## Publish Workflow
 
-1. Add `templates/<id>/.dollardeploy.yml` (+ `docker-compose.yml`, logo, scripts as needed). Download the logo into the template dir as `logo.svg` or `logo.png` (max 256 KB) and set `logo: logo.svg`; `index.js` serves it from jsDelivr pinned to its commit.
+1. Add `templates/<id>/.dollardeploy.yml` (+ `docker-compose.yml`, logo, scripts as needed).
 2. Validate it parses and matches the schema: from the templates repo root run `node index.js > /tmp/out.json` — it prints each template and errors on missing referenced files.
 3. Open a PR against `github.com/dollardeploy/templates`.
 4. On merge to `main`, the **Generate Templates** Action runs `node index.js > templates.json` and commits it; **Deploy Changed Templates** redeploys the demo. The app template then appears at `/r`.
@@ -168,7 +168,6 @@ Templates also support `files: [{ path: relative/file }]` (no `content`) to inli
 - **`docker-compose` without `services: [docker]`** → host has no Docker, deploy fails.
 - **Publishing the app's port directly** (not `127.0.0.1:$PORT:...`) → bypasses the proxy / no TLS.
 - **Referencing a `files` path that doesn't exist** → `index.js` throws `Referenced file not found`.
-- **Hotlinking the logo** (`logo: https://...`) → upstream sites move images and the catalog card breaks; `index.js` fails. Store the file in the template dir.
 - **Setting a reserved build var** (e.g. `APP_NAME`, `APP_TYPE`, `GIT_URL`) in `env` → launch rejects it.
 - **Hardcoding secrets** instead of `${GENERATED_PWD}` / `${GENERATED_SECRET}` → not unique per deploy.
 - **Private source repo** → the host can't clone it. Keep the source public.
