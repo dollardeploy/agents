@@ -83,7 +83,8 @@ build/deploy/service behavior. Set them via `--env NAME=VALUE` / `--env:NAME val
 `PORT` (`mainPort`, else `env.PORT`, else `3000`). docker-compose also gets `USER_UID`/`USER_GID`.
 
 **Service URLs (appear once the service is added):** `POSTGRES_URL` / `REDIS_URL` / `MONGODB_URL` / `MARIADB_URL`
-(in-container variants `POSTGRES_DOCKER_URL`, `REDIS_DOCKER_URL`). Extract parts with
+(in-container variants `POSTGRES_DOCKER_URL`, `REDIS_DOCKER_URL`, only when the host env opts in with
+`<SERVICE>_EXPOSE_DOCKER=1`). Extract parts with
 `${VAR:component}` — components: `host`, `hostname`, `port`, `path`, `username`, `password`, `database`, `query`, `fragment`
 (e.g. `${POSTGRES_URL:password}`).
 
@@ -102,7 +103,10 @@ build/deploy/service behavior. Set them via `--env NAME=VALUE` / `--env:NAME val
 | `DOCKER_COMPOSE_WAIT_TIMEOUT` / `DOCKER_COMPOSE_BUILD` / `DOCKER_COMPOSE_PULL` | `120` / — / — | Wait seconds; `1` rebuild each deploy; `policy` pull updated images             |
 
 **Server/service install config (host env vars):** `POSTGRES_VERSION`, `POSTGRES_FORCE_INSTALL`,
-`POSTGRES_DATABASES`, `POSTGRES_PASSWORD`, `POSTGRES_DATA_PATH`, `REDIS_DATA_PATH`, `ENCRYPTED_DEVICE` (LUKS).
+`POSTGRES_DATABASES`, `POSTGRES_PASSWORD`, `POSTGRES_DATA_PATH`, `REDIS_PASSWORD`, `REDIS_DATA_PATH`,
+`ENCRYPTED_DEVICE` (LUKS). New Postgres and Redis installs get a generated password unless one is set.
+Docker containers reach a service only with `POSTGRES_EXPOSE_DOCKER=1`, `REDIS_EXPOSE_DOCKER=1`,
+`MARIADB_EXPOSE_DOCKER=1` or `MONGODB_EXPOSE_DOCKER=1` (default `0`); already installed services keep their bind.
 Set them with `ddc host update <host-id> --env NAME=VALUE` (merged with existing), then `ddc host prepare <host-id>`.
 
 Reserved build vars (`APP_NAME`, `APP_TYPE`, `GIT_URL`, and the auto-provided ones above) are rejected if you set them.
